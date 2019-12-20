@@ -1,0 +1,168 @@
+﻿<Page x:Class="ADMIN_GUI.View.AddInfoView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ADMIN_GUI.View"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="830"
+      Title="AddInfoView">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="30"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Height="80" Background="#FFE6F7F7" Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+            <StackPanel>
+                <TextBlock FontSize="16" Margin="10 0 0 0">Add Faculty</TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="facultyName" materialDesign:HintAssist.Hint="Faculty name"  Margin="10 10 0 0" HorizontalAlignment="Left"/>
+                    <Button x:Name="addFaculty" Content="Add" Margin="10 0 0 0" Click="AddFaculty_Click"></Button>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Margin="30 0 0 0">
+                <TextBlock FontSize="16" Margin="10 0 0 0">Add Profession</TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <ComboBox Margin="10 10 0 0" x:Name="Faculty" Loaded="Faculty_Loaded" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Disabled" materialDesign:HintAssist.Hint="Faculty" Width="110" HorizontalAlignment="Left" materialDesign:HintAssist.HintOpacity=".26"></ComboBox>
+                    <TextBox x:Name="professionName" materialDesign:HintAssist.Hint="Profession name" Margin="10 10 0 0" HorizontalAlignment="Left"/>
+                    <Button x:Name="addProfession" Content="Add" Margin="10 0 0 0" Click="AddProfession_Click"></Button>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+        <!--Background="#FFDEF9F9"-->
+        <StackPanel Height="80"  Background="#FFE6F7F7" Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+            <StackPanel>
+                <TextBlock FontSize="16" Margin="10 0 0 0">Add Group</TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <ComboBox Margin="10 10 0 0" x:Name="Faculty1" Loaded="Faculty_Loaded" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Disabled" materialDesign:HintAssist.Hint="Faculty" Width="150" HorizontalAlignment="Left" materialDesign:HintAssist.HintOpacity=".26"></ComboBox>
+                    <ComboBox  x:Name="Profession" Margin="10 10 0 0" Loaded="Profession_Loaded" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Disabled" materialDesign:HintAssist.Hint="Profession" Width="150" HorizontalAlignment="Left" materialDesign:HintAssist.HintOpacity=".26"></ComboBox>
+                    <TextBox x:Name="gCourse" materialDesign:HintAssist.Hint="Course" Margin="10 10 0 0" HorizontalAlignment="Left"/>
+                    <TextBox x:Name="gGroup" materialDesign:HintAssist.Hint="Group" Margin="10 10 0 0" HorizontalAlignment="Left"/>
+                    <Button x:Name="addGroup" Content="Add" Margin="10 0 0 0" Click="AddGroup_Click"></Button>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Margin="30 0 0 0">
+                <TextBlock FontSize="16" Margin="10 0 0 0">Add Subject</TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="subjectName" materialDesign:HintAssist.Hint="Subject name" Margin="10 10 0 0" HorizontalAlignment="Left"/>
+                    <Button x:Name="addSubject" Content="Add" Margin="10 0 0 0" Click="AddSubject_Click"></Button>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+        <Grid Grid.Row="5" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid x:Name="FacultyList" Visibility="Hidden" AutoGenerateColumns="False" ItemsSource="{Binding Faculties}" SelectedItem="{Binding SelectedFaculty}" Grid.Column="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" CanUserAddRows="False" Background="{x:Null}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding FACULTY_NAME}" IsReadOnly="True" Header="Faculty name" Width="*"/>
+                    <DataGridTemplateColumn Header="Delete">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="DeleteFaculty" Click="DeleteFaculty_Click">
+                                    <materialDesign:PackIcon Kind="DeleteForever" Height="20" Width="20" />
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid x:Name="ProfessionList" Visibility="Hidden" AutoGenerateColumns="False" ItemsSource="{Binding ProfessionsForFaculty}" SelectedItem="{Binding SelectedProfession}" Grid.Column="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" CanUserAddRows="False" Background="{x:Null}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding FACULTY.FACULTY_NAME}" IsReadOnly="True" Header="Faculty name" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding PROFESSION_NAME}" IsReadOnly="True" Header="Profession name" Width="*"/>
+                    <DataGridTemplateColumn Header="Delete">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="DeleteProfession" Click="DeleteProfession_Click">
+                                    <materialDesign:PackIcon Kind="DeleteForever" Height="20" Width="20" />
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid x:Name="GroupList" Visibility="Hidden" AutoGenerateColumns="False" ItemsSource="{Binding GroupsForProfession}" SelectedItem="{Binding SelectedGroup}" Grid.Column="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" CanUserAddRows="False" Background="{x:Null}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding FACULTY.FACULTY_NAME}" IsReadOnly="True" Header="Faculty" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding PROFESSION.PROFESSION_NAME}" IsReadOnly="True" Header="Profession" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding COURSE}" IsReadOnly="True" Header="Course" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding GROUP_NUMBER}" IsReadOnly="True" Header="Group" Width="*"/>
+                    <DataGridTemplateColumn Header="Delete">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="DeleteGroup" Click="DeleteGroup_Click">
+                                    <materialDesign:PackIcon Kind="DeleteForever" Height="20" Width="20" />
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid x:Name="SubjectList" Visibility="Hidden" AutoGenerateColumns="False" ItemsSource="{Binding SubjectsForProfession}" SelectedItem="{Binding SelectedSubject}" Grid.Column="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" CanUserAddRows="False" Background="{x:Null}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding FACULTY.FACULTY_NAME}" IsReadOnly="True" Header="Faculty" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding PROFESSION.PROFESSION_NAME}" IsReadOnly="True" Header="Profession" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding SUBJECT_NAME}" IsReadOnly="True" Header="Subject" Width="*"/>
+                    <DataGridTemplateColumn Header="Delete">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="DeleteSubject" Click="DeleteSubject_Click">
+                                    <materialDesign:PackIcon Kind="DeleteForever" Height="20" Width="20" />
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel  Background="#FFEFF5F5" Grid.Column="2">
+                <TextBlock Margin="10 10 0 0" FontSize="22" TextAlignment="Center">View information</TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontSize="16" Margin="20 40 0 0" TextAlignment="Center">View all faculties</TextBlock>
+                    <Button x:Name="selectFaculties" Content="+"  Margin="20 35 0 0" Click="SelectFaculties_Click"></Button>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock FontSize="16" Margin="20 30 0 0" >View all professions for the faculty</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox Margin="30 10 0 0" x:Name="Faculty2" Loaded="Faculty_Loaded" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Disabled" materialDesign:HintAssist.Hint="Faculty" Width="100" HorizontalAlignment="Left" materialDesign:HintAssist.HintOpacity=".26"></ComboBox>
+                        <Button x:Name="selectProfessions" Content="+"  Margin="20 10 0 0" Click="SelectProfessions_Click"></Button>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock FontSize="16" Margin="20 30 0 0">View all groups for profession</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox  x:Name="Profession1" Margin="30 10 0 0" Loaded="Profession_Loaded" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Disabled" materialDesign:HintAssist.Hint="Profession" Width="100" HorizontalAlignment="Left" materialDesign:HintAssist.HintOpacity=".26"></ComboBox>
+                        <Button x:Name="selectGroups" Content="+"  Margin="20 10 0 0" Click="SelectGroups_Click"></Button>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock FontSize="16" Margin="20 30 0 0">View all subjects for profession</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox  x:Name="Profession2" Margin="30 10 0 0" Loaded="Profession_Loaded" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Disabled" materialDesign:HintAssist.Hint="Profession" Width="100" HorizontalAlignment="Left" materialDesign:HintAssist.HintOpacity=".26"></ComboBox>
+                        <Button x:Name="selectSubjects" Content="+"  Margin="20 10 0 0" Click="SelectSubjects_Click"></Button>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Width="80" Margin="20 30 0 0" x:Name="Import" Click="Import_Click">Import</Button>
+                    <Button Width="80" Margin="20 30 0 0" x:Name="Export" Click="Export_Click">Export</Button>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>
+

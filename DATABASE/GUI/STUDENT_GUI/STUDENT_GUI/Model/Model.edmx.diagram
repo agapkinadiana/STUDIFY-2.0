@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f075e03faf5f4a25bef4efbf92db9b57" Name="Diagram1">
+        <EntityTypeShape EntityType="STUDIFY2Model.ADS" Width="1.5" PointX="9.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="STUDIFY2Model.FACULTY" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="STUDIFY2Model.GROUP" Width="1.5" PointX="5.25" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="STUDIFY2Model.LESSON" Width="1.5" PointX="10.5" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="STUDIFY2Model.PROFESSION" Width="1.5" PointX="3" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="STUDIFY2Model.PROGRESS" Width="1.5" PointX="12.5" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="STUDIFY2Model.ROLE" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="STUDIFY2Model.STUDENT" Width="1.5" PointX="7.5" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="STUDIFY2Model.SUBGROUP" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="STUDIFY2Model.SUBJECT" Width="1.5" PointX="8.25" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="STUDIFY2Model.TASK" Width="1.5" PointX="13.5" PointY="10.125" IsExpanded="true" />
+        <AssociationConnector Association="STUDIFY2Model.FK__ADS__STUDENT_ID__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="STUDIFY2Model.FK__GROUP__FACULTY_I__108B795B" ManuallyRouted="false" />
+        <AssociationConnector Association="STUDIFY2Model.FK__PROFESSIO__FACUL__09DE7BCC" ManuallyRouted="false" />
+        <AssociationConnector Association="STUDIFY2Model.FK__SUBJECT__FACULTY__21B6055D" ManuallyRouted="false" />
+        <AssociationConnector Association="STUDIFY2Model.FK__GROUP__PROFESSIO__117F9D94" ManuallyRouted="false" />
+        <AssociationConnector Association="STUDIFY2Model.FK__LESSON__GROUP_ID__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="STUDIFY2Model.FK__STUDENT__GROUP_I__1BFD2C07" ManuallyRouted="false" />
+        <AssociationConnector Association="STUDIFY2Model.FK__LESSON__SUBGROUP__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="STUDIFY2Model.FK__LESSON__SUBJECT___276EDEB3" ManuallyRouted="false" />
+        <AssociationConnector Association="STUDIFY2Model.FK__SUBJECT__PROFESS__22AA2996" ManuallyRouted="false" />
+        <AssociationConnector Association="STUDIFY2Model.FK__PROGRESS__STUDEN__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="STUDIFY2Model.FK__PROGRESS__SUBJEC__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="STUDIFY2Model.FK__STUDENT__ROLE_ID__1B0907CE" ManuallyRouted="false" />
+        <AssociationConnector Association="STUDIFY2Model.FK__STUDENT__SUBGROU__1CF15040" ManuallyRouted="false" />
+        <AssociationConnector Association="STUDIFY2Model.FK__TASK__STUDENT_ID__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="STUDIFY2Model.FK__TASK__SUBJECT_ID__32E0915F" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

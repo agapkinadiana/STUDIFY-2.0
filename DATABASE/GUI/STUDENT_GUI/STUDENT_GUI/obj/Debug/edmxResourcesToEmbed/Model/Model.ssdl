@@ -1,0 +1,515 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище STUDIFY2Model" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ADS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CONTENT" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="DATE_OF_CREATE" Type="datetime" Nullable="false" />
+    <Property Name="STUDENT_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FACULTY">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FACULTY_NAME" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GROUP">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="COURSE" Type="int" Nullable="false" />
+    <Property Name="GROUP_NUMBER" Type="int" Nullable="false" />
+    <Property Name="FACULTY_ID" Type="int" Nullable="false" />
+    <Property Name="PROFESSION_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LESSON">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LESSON_DAY" Type="int" />
+    <Property Name="LESSON_NUMBER" Type="int" />
+    <Property Name="LESSON_TIME" Type="varchar" MaxLength="30" />
+    <Property Name="LESSON_TYPE" Type="varchar" MaxLength="30" />
+    <Property Name="LESSON_WEEK" Type="varchar" MaxLength="10" />
+    <Property Name="AUDITORIUM" Type="varchar" MaxLength="10" />
+    <Property Name="SUBJECT_ID" Type="int" />
+    <Property Name="GROUP_ID" Type="int" Nullable="false" />
+    <Property Name="SUBGROUP_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PROFESSION">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PROFESSION_NAME" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="FACULTY_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PROGRESS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NEEDED_TASKS" Type="int" Nullable="false" />
+    <Property Name="COMPLITED_TASKS" Type="int" Nullable="false" />
+    <Property Name="PROGRESS_COUNT" Type="int" StoreGeneratedPattern="Computed" />
+    <Property Name="SUBJECT_ID" Type="int" Nullable="false" />
+    <Property Name="STUDENT_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ROLE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TYPE" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="STUDENT">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="STUDENT_NAME" Type="varchar" MaxLength="100" />
+    <Property Name="PHOTO" Type="varbinary(max)" />
+    <Property Name="LOGIN" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PASSWORD" Type="varbinary" MaxLength="256" Nullable="false" />
+    <Property Name="ROLE_ID" Type="int" Nullable="false" />
+    <Property Name="GROUP_ID" Type="int" />
+    <Property Name="SUBGROUP_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="SUBGROUP">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SUBGROUP_NUMBER" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SUBJECT">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SUBJECT_NAME" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="FACULTY_ID" Type="int" Nullable="false" />
+    <Property Name="PROFESSION_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TASK">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CONTENT" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="DUEDATE" Type="date" Nullable="false" />
+    <Property Name="IS_COMPLITE" Type="bit" Nullable="false" />
+    <Property Name="SUBJECT_ID" Type="int" Nullable="false" />
+    <Property Name="STUDENT_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__ADS__STUDENT_ID__2E1BDC42">
+    <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="1" />
+    <End Role="ADS" Type="Self.ADS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STUDENT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ADS">
+        <PropertyRef Name="STUDENT_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GROUP__FACULTY_I__108B795B">
+    <End Role="FACULTY" Type="Self.FACULTY" Multiplicity="1" />
+    <End Role="GROUP" Type="Self.GROUP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FACULTY">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="GROUP">
+        <PropertyRef Name="FACULTY_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GROUP__PROFESSIO__117F9D94">
+    <End Role="PROFESSION" Type="Self.PROFESSION" Multiplicity="1" />
+    <End Role="GROUP" Type="Self.GROUP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROFESSION">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="GROUP">
+        <PropertyRef Name="PROFESSION_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LESSON__GROUP_ID__286302EC">
+    <End Role="GROUP" Type="Self.GROUP" Multiplicity="1" />
+    <End Role="LESSON" Type="Self.LESSON" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GROUP">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LESSON">
+        <PropertyRef Name="GROUP_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LESSON__SUBGROUP__29572725">
+    <End Role="SUBGROUP" Type="Self.SUBGROUP" Multiplicity="1" />
+    <End Role="LESSON" Type="Self.LESSON" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUBGROUP">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LESSON">
+        <PropertyRef Name="SUBGROUP_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LESSON__SUBJECT___276EDEB3">
+    <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="0..1" />
+    <End Role="LESSON" Type="Self.LESSON" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUBJECT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LESSON">
+        <PropertyRef Name="SUBJECT_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PROFESSIO__FACUL__09DE7BCC">
+    <End Role="FACULTY" Type="Self.FACULTY" Multiplicity="1" />
+    <End Role="PROFESSION" Type="Self.PROFESSION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FACULTY">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PROFESSION">
+        <PropertyRef Name="FACULTY_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PROGRESS__STUDEN__3A81B327">
+    <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="1" />
+    <End Role="PROGRESS" Type="Self.PROGRESS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STUDENT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PROGRESS">
+        <PropertyRef Name="STUDENT_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PROGRESS__SUBJEC__398D8EEE">
+    <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="1" />
+    <End Role="PROGRESS" Type="Self.PROGRESS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUBJECT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PROGRESS">
+        <PropertyRef Name="SUBJECT_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__STUDENT__GROUP_I__1BFD2C07">
+    <End Role="GROUP" Type="Self.GROUP" Multiplicity="0..1" />
+    <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GROUP">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="STUDENT">
+        <PropertyRef Name="GROUP_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__STUDENT__ROLE_ID__1B0907CE">
+    <End Role="ROLE" Type="Self.ROLE" Multiplicity="1" />
+    <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ROLE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="STUDENT">
+        <PropertyRef Name="ROLE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__STUDENT__SUBGROU__1CF15040">
+    <End Role="SUBGROUP" Type="Self.SUBGROUP" Multiplicity="0..1" />
+    <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUBGROUP">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="STUDENT">
+        <PropertyRef Name="SUBGROUP_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SUBJECT__FACULTY__21B6055D">
+    <End Role="FACULTY" Type="Self.FACULTY" Multiplicity="1" />
+    <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FACULTY">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SUBJECT">
+        <PropertyRef Name="FACULTY_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SUBJECT__PROFESS__22AA2996">
+    <End Role="PROFESSION" Type="Self.PROFESSION" Multiplicity="1" />
+    <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROFESSION">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SUBJECT">
+        <PropertyRef Name="PROFESSION_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TASK__STUDENT_ID__33D4B598">
+    <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="1" />
+    <End Role="TASK" Type="Self.TASK" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STUDENT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TASK">
+        <PropertyRef Name="STUDENT_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TASK__SUBJECT_ID__32E0915F">
+    <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="1" />
+    <End Role="TASK" Type="Self.TASK" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUBJECT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TASK">
+        <PropertyRef Name="SUBJECT_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="addProgress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="student_id" Type="int" Mode="In" />
+    <Parameter Name="subject_name" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="addTask" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="student_id" Type="int" Mode="In" />
+    <Parameter Name="deadline" Type="datetime" Mode="In" />
+    <Parameter Name="subject" Type="varchar" Mode="In" />
+    <Parameter Name="content" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="changeCompliteFalse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="task_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="changeCompliteTrue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="task_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="checkRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="role" Type="nvarchar" Mode="InOut" />
+  </Function>
+  <Function Name="checkStudentData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="login" Type="varchar" Mode="In" />
+    <Parameter Name="password" Type="varchar" Mode="In" />
+    <Parameter Name="result" Type="nvarchar" Mode="InOut" />
+  </Function>
+  <Function Name="checkTimetableByIdGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="countMessage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="deleteMessage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="message_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="deleteProgress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="progress_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="deleteTask" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="task_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="getFaculties" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="getFacultyIdByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="faculty_name" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="getGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="getGroupId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="course" Type="int" Mode="In" />
+    <Parameter Name="group_number" Type="int" Mode="In" />
+    <Parameter Name="faculty_id" Type="int" Mode="In" />
+    <Parameter Name="profession_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getMessage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="getProfessionIdByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="profession_name" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="getProfessions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="getProgress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="student_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getSatisfiedTasks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="student_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getStudentByCard" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="card_number" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getStudentsForHeadman" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="course" Type="int" Mode="In" />
+    <Parameter Name="group" Type="int" Mode="In" />
+    <Parameter Name="faculty_id" Type="int" Mode="In" />
+    <Parameter Name="profession_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getSubgroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="getSubgroupId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="subgroup" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getSubjectByFacultyProfessionName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="profession_name" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="getSubjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="getTasksBySubject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="student_id" Type="int" Mode="In" />
+    <Parameter Name="subject" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="getTasksForStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="student_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getTimetable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="getTimetableByWeek" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="week" Type="varchar" Mode="In" />
+    <Parameter Name="group_id" Type="int" Mode="In" />
+    <Parameter Name="subroup_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getTimetableByWeekAdmin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="week" Type="varchar" Mode="In" />
+    <Parameter Name="group" Type="int" Mode="In" />
+    <Parameter Name="subgroup" Type="int" Mode="In" />
+    <Parameter Name="course" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getUnsatisfiedTasks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="student_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getUserByLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="login" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="insertTimetable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="day" Type="int" Mode="In" />
+    <Parameter Name="number" Type="int" Mode="In" />
+    <Parameter Name="week" Type="varchar" Mode="In" />
+    <Parameter Name="group_id" Type="int" Mode="In" />
+    <Parameter Name="subgroup_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="registerStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="num_card" Type="int" Mode="In" />
+    <Parameter Name="name" Type="varchar" Mode="In" />
+    <Parameter Name="login" Type="varchar" Mode="In" />
+    <Parameter Name="password" Type="varchar" Mode="In" />
+    <Parameter Name="group_id" Type="int" Mode="In" />
+    <Parameter Name="subgroup_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sendMessage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="content" Type="varchar" Mode="In" />
+    <Parameter Name="date" Type="datetime" Mode="In" />
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="setPhoto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="student_id" Type="int" Mode="In" />
+    <Parameter Name="photo" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="updateProgress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="complited" Type="int" Mode="In" />
+    <Parameter Name="needed" Type="int" Mode="In" />
+    <Parameter Name="progress_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="updateTimetable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="subject_name" Type="varchar" Mode="In" />
+    <Parameter Name="timetable_id" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="Хранилище STUDIFY2ModelContainer">
+    <EntitySet Name="ADS" EntityType="Self.ADS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FACULTY" EntityType="Self.FACULTY" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GROUP" EntityType="Self.GROUP" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LESSON" EntityType="Self.LESSON" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PROFESSION" EntityType="Self.PROFESSION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PROGRESS" EntityType="Self.PROGRESS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ROLE" EntityType="Self.ROLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="STUDENT" EntityType="Self.STUDENT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SUBGROUP" EntityType="Self.SUBGROUP" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SUBJECT" EntityType="Self.SUBJECT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TASK" EntityType="Self.TASK" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__ADS__STUDENT_ID__2E1BDC42" Association="Self.FK__ADS__STUDENT_ID__2E1BDC42">
+      <End Role="STUDENT" EntitySet="STUDENT" />
+      <End Role="ADS" EntitySet="ADS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GROUP__FACULTY_I__108B795B" Association="Self.FK__GROUP__FACULTY_I__108B795B">
+      <End Role="FACULTY" EntitySet="FACULTY" />
+      <End Role="GROUP" EntitySet="GROUP" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GROUP__PROFESSIO__117F9D94" Association="Self.FK__GROUP__PROFESSIO__117F9D94">
+      <End Role="PROFESSION" EntitySet="PROFESSION" />
+      <End Role="GROUP" EntitySet="GROUP" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LESSON__GROUP_ID__286302EC" Association="Self.FK__LESSON__GROUP_ID__286302EC">
+      <End Role="GROUP" EntitySet="GROUP" />
+      <End Role="LESSON" EntitySet="LESSON" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LESSON__SUBGROUP__29572725" Association="Self.FK__LESSON__SUBGROUP__29572725">
+      <End Role="SUBGROUP" EntitySet="SUBGROUP" />
+      <End Role="LESSON" EntitySet="LESSON" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LESSON__SUBJECT___276EDEB3" Association="Self.FK__LESSON__SUBJECT___276EDEB3">
+      <End Role="SUBJECT" EntitySet="SUBJECT" />
+      <End Role="LESSON" EntitySet="LESSON" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PROFESSIO__FACUL__09DE7BCC" Association="Self.FK__PROFESSIO__FACUL__09DE7BCC">
+      <End Role="FACULTY" EntitySet="FACULTY" />
+      <End Role="PROFESSION" EntitySet="PROFESSION" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PROGRESS__STUDEN__3A81B327" Association="Self.FK__PROGRESS__STUDEN__3A81B327">
+      <End Role="STUDENT" EntitySet="STUDENT" />
+      <End Role="PROGRESS" EntitySet="PROGRESS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PROGRESS__SUBJEC__398D8EEE" Association="Self.FK__PROGRESS__SUBJEC__398D8EEE">
+      <End Role="SUBJECT" EntitySet="SUBJECT" />
+      <End Role="PROGRESS" EntitySet="PROGRESS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__STUDENT__GROUP_I__1BFD2C07" Association="Self.FK__STUDENT__GROUP_I__1BFD2C07">
+      <End Role="GROUP" EntitySet="GROUP" />
+      <End Role="STUDENT" EntitySet="STUDENT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__STUDENT__ROLE_ID__1B0907CE" Association="Self.FK__STUDENT__ROLE_ID__1B0907CE">
+      <End Role="ROLE" EntitySet="ROLE" />
+      <End Role="STUDENT" EntitySet="STUDENT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__STUDENT__SUBGROU__1CF15040" Association="Self.FK__STUDENT__SUBGROU__1CF15040">
+      <End Role="SUBGROUP" EntitySet="SUBGROUP" />
+      <End Role="STUDENT" EntitySet="STUDENT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SUBJECT__FACULTY__21B6055D" Association="Self.FK__SUBJECT__FACULTY__21B6055D">
+      <End Role="FACULTY" EntitySet="FACULTY" />
+      <End Role="SUBJECT" EntitySet="SUBJECT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SUBJECT__PROFESS__22AA2996" Association="Self.FK__SUBJECT__PROFESS__22AA2996">
+      <End Role="PROFESSION" EntitySet="PROFESSION" />
+      <End Role="SUBJECT" EntitySet="SUBJECT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TASK__STUDENT_ID__33D4B598" Association="Self.FK__TASK__STUDENT_ID__33D4B598">
+      <End Role="STUDENT" EntitySet="STUDENT" />
+      <End Role="TASK" EntitySet="TASK" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TASK__SUBJECT_ID__32E0915F" Association="Self.FK__TASK__SUBJECT_ID__32E0915F">
+      <End Role="SUBJECT" EntitySet="SUBJECT" />
+      <End Role="TASK" EntitySet="TASK" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,73 @@
+﻿<Page x:Class="STUDENT_GUI.View.StudentInfo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:STUDENT_GUI.View"
+xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="715" d:DesignWidth="830"
+      Title="StudentInfo">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="30"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="220"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1">
+            <Image x:Name="image" Source="{Binding BitmapImage}" Width="350" Height="350" />
+            <Button Content="Update photo" Width="150" Margin="100 20 100 0" Style="{DynamicResource DownloadButtonStyle}" x:Name="imageButton" Click="ImageButton_Click"/>
+        </StackPanel>
+        <Grid Grid.Column="1" Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions >
+            <StackPanel Orientation="Vertical" Grid.Column="0">
+                <StackPanel Orientation="Horizontal" Margin="10 20 0 0">
+                    <TextBlock  Text="Number of student card" FontSize="20" Foreground="#FF00BCD4"/>
+                    <TextBlock  Margin="30 0 0 0" FontSize="18" Foreground="#FF494949" Text="{Binding CardNum}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10 20 0 0">
+                    <TextBlock Text="Name" FontSize="20" Foreground="#FF00BCD4"/>
+                    <TextBlock Margin="30 0 0 0" FontSize="18" Foreground="#FF494949" Text="{Binding Name}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10 20 0 0">
+                    <TextBlock Text="Login" FontSize="20" Foreground="#FF00BCD4"/>
+                    <TextBlock Margin="30 0 0 0" FontSize="18" Foreground="#FF494949" Text="{Binding Login}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10 20 0 0">
+                    <TextBlock Text="Subgroup number" FontSize="20" Foreground="#FF00BCD4"/>
+                    <TextBlock Margin="30 0 0 0" FontSize="18" Foreground="#FF494949" Text="{Binding Subgroup}"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Column="2">
+                <StackPanel Orientation="Horizontal" Margin="10 20 0 0">
+                    <TextBlock Text="Faculty name" FontSize="20" Foreground="#FF00BCD4"/>
+                    <TextBlock  Margin="30 0 0 0" FontSize="18" Foreground="#FF494949" Text="{Binding Faculty}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10 20 0 0">
+                    <TextBlock  Text="Profession name" FontSize="20" Foreground="#FF00BCD4"/>
+                    <TextBlock  Margin="30 0 0 0" FontSize="18" Foreground="#FF494949" Text="{Binding Profession}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10 20 0 0">
+                    <TextBlock Text="Course number" FontSize="20" Foreground="#FF00BCD4"/>
+                    <TextBlock Margin="30 0 0 0" FontSize="18" Foreground="#FF494949" Text="{Binding Course}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10 20 0 0">
+                    <TextBlock Text="Group number" FontSize="20" Foreground="#FF00BCD4"/>
+                    <TextBlock Margin="30 0 0 0" FontSize="18" Foreground="#FF494949" Text="{Binding Group}"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

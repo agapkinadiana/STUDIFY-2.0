@@ -1,0 +1,680 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="STUDIFY2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ADS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CONTENT" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DATE_OF_CREATE" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="STUDENT_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="STUDENT" Relationship="Self.FK__ADS__STUDENT_ID__2E1BDC42" FromRole="ADS" ToRole="STUDENT" />
+  </EntityType>
+  <EntityType Name="FACULTY">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FACULTY_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="GROUP" Relationship="Self.FK__GROUP__FACULTY_I__108B795B" FromRole="FACULTY" ToRole="GROUP" />
+    <NavigationProperty Name="PROFESSION" Relationship="Self.FK__PROFESSIO__FACUL__09DE7BCC" FromRole="FACULTY" ToRole="PROFESSION" />
+    <NavigationProperty Name="SUBJECT" Relationship="Self.FK__SUBJECT__FACULTY__21B6055D" FromRole="FACULTY" ToRole="SUBJECT" />
+  </EntityType>
+  <EntityType Name="GROUP">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="COURSE" Type="Int32" Nullable="false" />
+    <Property Name="GROUP_NUMBER" Type="Int32" Nullable="false" />
+    <Property Name="FACULTY_ID" Type="Int32" Nullable="false" />
+    <Property Name="PROFESSION_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="FACULTY" Relationship="Self.FK__GROUP__FACULTY_I__108B795B" FromRole="GROUP" ToRole="FACULTY" />
+    <NavigationProperty Name="PROFESSION" Relationship="Self.FK__GROUP__PROFESSIO__117F9D94" FromRole="GROUP" ToRole="PROFESSION" />
+    <NavigationProperty Name="LESSON" Relationship="Self.FK__LESSON__GROUP_ID__286302EC" FromRole="GROUP" ToRole="LESSON" />
+    <NavigationProperty Name="STUDENT" Relationship="Self.FK__STUDENT__GROUP_I__1BFD2C07" FromRole="GROUP" ToRole="STUDENT" />
+  </EntityType>
+  <EntityType Name="LESSON">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LESSON_DAY" Type="Int32" />
+    <Property Name="LESSON_NUMBER" Type="Int32" />
+    <Property Name="LESSON_TIME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="LESSON_TYPE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="LESSON_WEEK" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="AUDITORIUM" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="SUBJECT_ID" Type="Int32" />
+    <Property Name="GROUP_ID" Type="Int32" Nullable="false" />
+    <Property Name="SUBGROUP_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="GROUP" Relationship="Self.FK__LESSON__GROUP_ID__286302EC" FromRole="LESSON" ToRole="GROUP" />
+    <NavigationProperty Name="SUBGROUP" Relationship="Self.FK__LESSON__SUBGROUP__29572725" FromRole="LESSON" ToRole="SUBGROUP" />
+    <NavigationProperty Name="SUBJECT" Relationship="Self.FK__LESSON__SUBJECT___276EDEB3" FromRole="LESSON" ToRole="SUBJECT" />
+  </EntityType>
+  <EntityType Name="PROFESSION">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PROFESSION_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FACULTY_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="FACULTY" Relationship="Self.FK__PROFESSIO__FACUL__09DE7BCC" FromRole="PROFESSION" ToRole="FACULTY" />
+    <NavigationProperty Name="GROUP" Relationship="Self.FK__GROUP__PROFESSIO__117F9D94" FromRole="PROFESSION" ToRole="GROUP" />
+    <NavigationProperty Name="SUBJECT" Relationship="Self.FK__SUBJECT__PROFESS__22AA2996" FromRole="PROFESSION" ToRole="SUBJECT" />
+  </EntityType>
+  <EntityType Name="PROGRESS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NEEDED_TASKS" Type="Int32" Nullable="false" />
+    <Property Name="COMPLITED_TASKS" Type="Int32" Nullable="false" />
+    <Property Name="PROGRESS_COUNT" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="SUBJECT_ID" Type="Int32" Nullable="false" />
+    <Property Name="STUDENT_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="STUDENT" Relationship="Self.FK__PROGRESS__STUDEN__3A81B327" FromRole="PROGRESS" ToRole="STUDENT" />
+    <NavigationProperty Name="SUBJECT" Relationship="Self.FK__PROGRESS__SUBJEC__398D8EEE" FromRole="PROGRESS" ToRole="SUBJECT" />
+  </EntityType>
+  <EntityType Name="ROLE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TYPE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="STUDENT" Relationship="Self.FK__STUDENT__ROLE_ID__1B0907CE" FromRole="ROLE" ToRole="STUDENT" />
+  </EntityType>
+  <EntityType Name="STUDENT">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="STUDENT_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="PHOTO" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="LOGIN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PASSWORD" Type="Binary" MaxLength="256" FixedLength="false" Nullable="false" />
+    <Property Name="ROLE_ID" Type="Int32" Nullable="false" />
+    <Property Name="GROUP_ID" Type="Int32" />
+    <Property Name="SUBGROUP_ID" Type="Int32" />
+    <NavigationProperty Name="ADS" Relationship="Self.FK__ADS__STUDENT_ID__2E1BDC42" FromRole="STUDENT" ToRole="ADS" />
+    <NavigationProperty Name="GROUP" Relationship="Self.FK__STUDENT__GROUP_I__1BFD2C07" FromRole="STUDENT" ToRole="GROUP" />
+    <NavigationProperty Name="PROGRESS" Relationship="Self.FK__PROGRESS__STUDEN__3A81B327" FromRole="STUDENT" ToRole="PROGRESS" />
+    <NavigationProperty Name="ROLE" Relationship="Self.FK__STUDENT__ROLE_ID__1B0907CE" FromRole="STUDENT" ToRole="ROLE" />
+    <NavigationProperty Name="SUBGROUP" Relationship="Self.FK__STUDENT__SUBGROU__1CF15040" FromRole="STUDENT" ToRole="SUBGROUP" />
+    <NavigationProperty Name="TASK" Relationship="Self.FK__TASK__STUDENT_ID__33D4B598" FromRole="STUDENT" ToRole="TASK" />
+  </EntityType>
+  <EntityType Name="SUBGROUP">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SUBGROUP_NUMBER" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="LESSON" Relationship="Self.FK__LESSON__SUBGROUP__29572725" FromRole="SUBGROUP" ToRole="LESSON" />
+    <NavigationProperty Name="STUDENT" Relationship="Self.FK__STUDENT__SUBGROU__1CF15040" FromRole="SUBGROUP" ToRole="STUDENT" />
+  </EntityType>
+  <EntityType Name="SUBJECT">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SUBJECT_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FACULTY_ID" Type="Int32" Nullable="false" />
+    <Property Name="PROFESSION_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="FACULTY" Relationship="Self.FK__SUBJECT__FACULTY__21B6055D" FromRole="SUBJECT" ToRole="FACULTY" />
+    <NavigationProperty Name="LESSON" Relationship="Self.FK__LESSON__SUBJECT___276EDEB3" FromRole="SUBJECT" ToRole="LESSON" />
+    <NavigationProperty Name="PROFESSION" Relationship="Self.FK__SUBJECT__PROFESS__22AA2996" FromRole="SUBJECT" ToRole="PROFESSION" />
+    <NavigationProperty Name="PROGRESS" Relationship="Self.FK__PROGRESS__SUBJEC__398D8EEE" FromRole="SUBJECT" ToRole="PROGRESS" />
+    <NavigationProperty Name="TASK" Relationship="Self.FK__TASK__SUBJECT_ID__32E0915F" FromRole="SUBJECT" ToRole="TASK" />
+  </EntityType>
+  <EntityType Name="TASK">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CONTENT" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DUEDATE" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="IS_COMPLITE" Type="Boolean" Nullable="false" />
+    <Property Name="SUBJECT_ID" Type="Int32" Nullable="false" />
+    <Property Name="STUDENT_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="STUDENT" Relationship="Self.FK__TASK__STUDENT_ID__33D4B598" FromRole="TASK" ToRole="STUDENT" />
+    <NavigationProperty Name="SUBJECT" Relationship="Self.FK__TASK__SUBJECT_ID__32E0915F" FromRole="TASK" ToRole="SUBJECT" />
+  </EntityType>
+  <Association Name="FK__ADS__STUDENT_ID__2E1BDC42">
+    <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="1" />
+    <End Role="ADS" Type="Self.ADS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STUDENT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ADS">
+        <PropertyRef Name="STUDENT_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GROUP__FACULTY_I__108B795B">
+    <End Role="FACULTY" Type="Self.FACULTY" Multiplicity="1" />
+    <End Role="GROUP" Type="Self.GROUP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FACULTY">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="GROUP">
+        <PropertyRef Name="FACULTY_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PROFESSIO__FACUL__09DE7BCC">
+    <End Role="FACULTY" Type="Self.FACULTY" Multiplicity="1" />
+    <End Role="PROFESSION" Type="Self.PROFESSION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FACULTY">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PROFESSION">
+        <PropertyRef Name="FACULTY_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SUBJECT__FACULTY__21B6055D">
+    <End Role="FACULTY" Type="Self.FACULTY" Multiplicity="1" />
+    <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FACULTY">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SUBJECT">
+        <PropertyRef Name="FACULTY_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GROUP__PROFESSIO__117F9D94">
+    <End Role="PROFESSION" Type="Self.PROFESSION" Multiplicity="1" />
+    <End Role="GROUP" Type="Self.GROUP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROFESSION">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="GROUP">
+        <PropertyRef Name="PROFESSION_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LESSON__GROUP_ID__286302EC">
+    <End Role="GROUP" Type="Self.GROUP" Multiplicity="1" />
+    <End Role="LESSON" Type="Self.LESSON" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GROUP">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LESSON">
+        <PropertyRef Name="GROUP_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__STUDENT__GROUP_I__1BFD2C07">
+    <End Role="GROUP" Type="Self.GROUP" Multiplicity="0..1" />
+    <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GROUP">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="STUDENT">
+        <PropertyRef Name="GROUP_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LESSON__SUBGROUP__29572725">
+    <End Role="SUBGROUP" Type="Self.SUBGROUP" Multiplicity="1" />
+    <End Role="LESSON" Type="Self.LESSON" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUBGROUP">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LESSON">
+        <PropertyRef Name="SUBGROUP_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LESSON__SUBJECT___276EDEB3">
+    <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="0..1" />
+    <End Role="LESSON" Type="Self.LESSON" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUBJECT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LESSON">
+        <PropertyRef Name="SUBJECT_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SUBJECT__PROFESS__22AA2996">
+    <End Role="PROFESSION" Type="Self.PROFESSION" Multiplicity="1" />
+    <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROFESSION">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SUBJECT">
+        <PropertyRef Name="PROFESSION_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PROGRESS__STUDEN__3A81B327">
+    <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="1" />
+    <End Role="PROGRESS" Type="Self.PROGRESS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STUDENT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PROGRESS">
+        <PropertyRef Name="STUDENT_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PROGRESS__SUBJEC__398D8EEE">
+    <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="1" />
+    <End Role="PROGRESS" Type="Self.PROGRESS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUBJECT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PROGRESS">
+        <PropertyRef Name="SUBJECT_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__STUDENT__ROLE_ID__1B0907CE">
+    <End Role="ROLE" Type="Self.ROLE" Multiplicity="1" />
+    <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ROLE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="STUDENT">
+        <PropertyRef Name="ROLE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__STUDENT__SUBGROU__1CF15040">
+    <End Role="SUBGROUP" Type="Self.SUBGROUP" Multiplicity="0..1" />
+    <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUBGROUP">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="STUDENT">
+        <PropertyRef Name="SUBGROUP_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TASK__STUDENT_ID__33D4B598">
+    <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="1" />
+    <End Role="TASK" Type="Self.TASK" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STUDENT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TASK">
+        <PropertyRef Name="STUDENT_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TASK__SUBJECT_ID__32E0915F">
+    <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="1" />
+    <End Role="TASK" Type="Self.TASK" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUBJECT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TASK">
+        <PropertyRef Name="SUBJECT_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="STUDIFY2Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ADS" EntityType="Self.ADS" />
+    <EntitySet Name="FACULTY" EntityType="Self.FACULTY" />
+    <EntitySet Name="GROUP" EntityType="Self.GROUP" />
+    <EntitySet Name="LESSON" EntityType="Self.LESSON" />
+    <EntitySet Name="PROFESSION" EntityType="Self.PROFESSION" />
+    <EntitySet Name="PROGRESS" EntityType="Self.PROGRESS" />
+    <EntitySet Name="ROLE" EntityType="Self.ROLE" />
+    <EntitySet Name="STUDENT" EntityType="Self.STUDENT" />
+    <EntitySet Name="SUBGROUP" EntityType="Self.SUBGROUP" />
+    <EntitySet Name="SUBJECT" EntityType="Self.SUBJECT" />
+    <EntitySet Name="TASK" EntityType="Self.TASK" />
+    <AssociationSet Name="FK__ADS__STUDENT_ID__2E1BDC42" Association="Self.FK__ADS__STUDENT_ID__2E1BDC42">
+      <End Role="STUDENT" EntitySet="STUDENT" />
+      <End Role="ADS" EntitySet="ADS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GROUP__FACULTY_I__108B795B" Association="Self.FK__GROUP__FACULTY_I__108B795B">
+      <End Role="FACULTY" EntitySet="FACULTY" />
+      <End Role="GROUP" EntitySet="GROUP" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PROFESSIO__FACUL__09DE7BCC" Association="Self.FK__PROFESSIO__FACUL__09DE7BCC">
+      <End Role="FACULTY" EntitySet="FACULTY" />
+      <End Role="PROFESSION" EntitySet="PROFESSION" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SUBJECT__FACULTY__21B6055D" Association="Self.FK__SUBJECT__FACULTY__21B6055D">
+      <End Role="FACULTY" EntitySet="FACULTY" />
+      <End Role="SUBJECT" EntitySet="SUBJECT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GROUP__PROFESSIO__117F9D94" Association="Self.FK__GROUP__PROFESSIO__117F9D94">
+      <End Role="PROFESSION" EntitySet="PROFESSION" />
+      <End Role="GROUP" EntitySet="GROUP" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LESSON__GROUP_ID__286302EC" Association="Self.FK__LESSON__GROUP_ID__286302EC">
+      <End Role="GROUP" EntitySet="GROUP" />
+      <End Role="LESSON" EntitySet="LESSON" />
+    </AssociationSet>
+    <AssociationSet Name="FK__STUDENT__GROUP_I__1BFD2C07" Association="Self.FK__STUDENT__GROUP_I__1BFD2C07">
+      <End Role="GROUP" EntitySet="GROUP" />
+      <End Role="STUDENT" EntitySet="STUDENT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LESSON__SUBGROUP__29572725" Association="Self.FK__LESSON__SUBGROUP__29572725">
+      <End Role="SUBGROUP" EntitySet="SUBGROUP" />
+      <End Role="LESSON" EntitySet="LESSON" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LESSON__SUBJECT___276EDEB3" Association="Self.FK__LESSON__SUBJECT___276EDEB3">
+      <End Role="SUBJECT" EntitySet="SUBJECT" />
+      <End Role="LESSON" EntitySet="LESSON" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SUBJECT__PROFESS__22AA2996" Association="Self.FK__SUBJECT__PROFESS__22AA2996">
+      <End Role="PROFESSION" EntitySet="PROFESSION" />
+      <End Role="SUBJECT" EntitySet="SUBJECT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PROGRESS__STUDEN__3A81B327" Association="Self.FK__PROGRESS__STUDEN__3A81B327">
+      <End Role="STUDENT" EntitySet="STUDENT" />
+      <End Role="PROGRESS" EntitySet="PROGRESS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PROGRESS__SUBJEC__398D8EEE" Association="Self.FK__PROGRESS__SUBJEC__398D8EEE">
+      <End Role="SUBJECT" EntitySet="SUBJECT" />
+      <End Role="PROGRESS" EntitySet="PROGRESS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__STUDENT__ROLE_ID__1B0907CE" Association="Self.FK__STUDENT__ROLE_ID__1B0907CE">
+      <End Role="ROLE" EntitySet="ROLE" />
+      <End Role="STUDENT" EntitySet="STUDENT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__STUDENT__SUBGROU__1CF15040" Association="Self.FK__STUDENT__SUBGROU__1CF15040">
+      <End Role="SUBGROUP" EntitySet="SUBGROUP" />
+      <End Role="STUDENT" EntitySet="STUDENT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TASK__STUDENT_ID__33D4B598" Association="Self.FK__TASK__STUDENT_ID__33D4B598">
+      <End Role="STUDENT" EntitySet="STUDENT" />
+      <End Role="TASK" EntitySet="TASK" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TASK__SUBJECT_ID__32E0915F" Association="Self.FK__TASK__SUBJECT_ID__32E0915F">
+      <End Role="SUBJECT" EntitySet="SUBJECT" />
+      <End Role="TASK" EntitySet="TASK" />
+    </AssociationSet>
+    <FunctionImport Name="addProgress">
+      <Parameter Name="student_id" Mode="In" Type="Int32" />
+      <Parameter Name="subject_name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="addTask">
+      <Parameter Name="student_id" Mode="In" Type="Int32" />
+      <Parameter Name="deadline" Mode="In" Type="DateTime" />
+      <Parameter Name="subject" Mode="In" Type="String" />
+      <Parameter Name="content" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="changeCompliteFalse">
+      <Parameter Name="task_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="changeCompliteTrue">
+      <Parameter Name="task_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="checkRole">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="role" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="checkStudentData">
+      <Parameter Name="login" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="result" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="checkTimetableByIdGroup" ReturnType="Collection(Int32)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="countMessage" ReturnType="Collection(Int32)" />
+    <FunctionImport Name="deleteMessage">
+      <Parameter Name="message_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="deleteProgress">
+      <Parameter Name="progress_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="deleteTask">
+      <Parameter Name="task_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getCourse" ReturnType="Collection(Int32)" />
+    <FunctionImport Name="getFaculties" EntitySet="FACULTY" ReturnType="Collection(STUDIFY2Model.FACULTY)" />
+    <FunctionImport Name="getFacultyIdByName" ReturnType="Collection(Int32)">
+      <Parameter Name="faculty_name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="getGroup" ReturnType="Collection(Int32)" />
+    <FunctionImport Name="getGroupId" ReturnType="Collection(Int32)">
+      <Parameter Name="course" Mode="In" Type="Int32" />
+      <Parameter Name="group_number" Mode="In" Type="Int32" />
+      <Parameter Name="faculty_id" Mode="In" Type="Int32" />
+      <Parameter Name="profession_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getMessage" EntitySet="ADS" ReturnType="Collection(STUDIFY2Model.ADS)" />
+    <FunctionImport Name="getProfessionIdByName" ReturnType="Collection(Int32)">
+      <Parameter Name="profession_name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="getProfessions" EntitySet="PROFESSION" ReturnType="Collection(STUDIFY2Model.PROFESSION)" />
+    <FunctionImport Name="getProgress" EntitySet="PROGRESS" ReturnType="Collection(STUDIFY2Model.PROGRESS)">
+      <Parameter Name="student_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getSatisfiedTasks" EntitySet="TASK" ReturnType="Collection(STUDIFY2Model.TASK)">
+      <Parameter Name="student_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getStudentByCard" EntitySet="STUDENT" ReturnType="Collection(STUDIFY2Model.STUDENT)">
+      <Parameter Name="card_number" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getStudentsForHeadman" EntitySet="STUDENT" ReturnType="Collection(STUDIFY2Model.STUDENT)">
+      <Parameter Name="course" Mode="In" Type="Int32" />
+      <Parameter Name="group" Mode="In" Type="Int32" />
+      <Parameter Name="faculty_id" Mode="In" Type="Int32" />
+      <Parameter Name="profession_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getSubgroup" ReturnType="Collection(Int32)" />
+    <FunctionImport Name="getSubgroupId" ReturnType="Collection(Int32)">
+      <Parameter Name="subgroup" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getSubjects" EntitySet="SUBJECT" ReturnType="Collection(STUDIFY2Model.SUBJECT)" />
+    <FunctionImport Name="getTasksBySubject" EntitySet="TASK" ReturnType="Collection(STUDIFY2Model.TASK)">
+      <Parameter Name="student_id" Mode="In" Type="Int32" />
+      <Parameter Name="subject" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="getTasksForStudent" EntitySet="TASK" ReturnType="Collection(STUDIFY2Model.TASK)">
+      <Parameter Name="student_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getTimetable" EntitySet="LESSON" ReturnType="Collection(STUDIFY2Model.LESSON)" />
+    <FunctionImport Name="getTimetableByWeek" EntitySet="LESSON" ReturnType="Collection(STUDIFY2Model.LESSON)">
+      <Parameter Name="week" Mode="In" Type="String" />
+      <Parameter Name="group_id" Mode="In" Type="Int32" />
+      <Parameter Name="subroup_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getUnsatisfiedTasks" EntitySet="TASK" ReturnType="Collection(STUDIFY2Model.TASK)">
+      <Parameter Name="student_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getUserByLogin" EntitySet="STUDENT" ReturnType="Collection(STUDIFY2Model.STUDENT)">
+      <Parameter Name="login" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="insertTimetable">
+      <Parameter Name="day" Mode="In" Type="Int32" />
+      <Parameter Name="number" Mode="In" Type="Int32" />
+      <Parameter Name="week" Mode="In" Type="String" />
+      <Parameter Name="group_id" Mode="In" Type="Int32" />
+      <Parameter Name="subgroup_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="registerStudent">
+      <Parameter Name="num_card" Mode="In" Type="Int32" />
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="login" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="group_id" Mode="In" Type="Int32" />
+      <Parameter Name="subgroup_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sendMessage">
+      <Parameter Name="content" Mode="In" Type="String" />
+      <Parameter Name="date" Mode="In" Type="DateTime" />
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="setPhoto">
+      <Parameter Name="student_id" Mode="In" Type="Int32" />
+      <Parameter Name="photo" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="updateProgress">
+      <Parameter Name="complited" Mode="In" Type="Int32" />
+      <Parameter Name="needed" Mode="In" Type="Int32" />
+      <Parameter Name="progress_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="updateTimetable">
+      <Parameter Name="subject_name" Mode="In" Type="String" />
+      <Parameter Name="timetable_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getSubjectByFacultyProfessionName" EntitySet="SUBJECT" ReturnType="Collection(STUDIFY2Model.SUBJECT)">
+      <Parameter Name="profession_name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="getTimetableByWeekAdmin" EntitySet="LESSON" ReturnType="Collection(STUDIFY2Model.LESSON)">
+      <Parameter Name="week" Mode="In" Type="String" />
+      <Parameter Name="group" Mode="In" Type="Int32" />
+      <Parameter Name="subgroup" Mode="In" Type="Int32" />
+      <Parameter Name="course" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="getFaculties_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="FACULTY_NAME" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="getMessage_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="CONTENT" Nullable="false" MaxLength="500" />
+    <Property Type="DateTime" Name="DATE_OF_CREATE" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="STUDENT_ID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="getProfessions_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="PROFESSION_NAME" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="FACULTY_ID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="getProgress_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="Int32" Name="NEEDED_TASKS" Nullable="false" />
+    <Property Type="Int32" Name="COMPLITED_TASKS" Nullable="false" />
+    <Property Type="Int32" Name="PROGRESS_COUNT" Nullable="true" />
+    <Property Type="Int32" Name="SUBJECT_ID" Nullable="false" />
+    <Property Type="Int32" Name="STUDENT_ID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="getSatisfiedTasks_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="CONTENT" Nullable="false" MaxLength="500" />
+    <Property Type="DateTime" Name="DUEDATE" Nullable="false" />
+    <Property Type="Boolean" Name="IS_COMPLITE" Nullable="false" />
+    <Property Type="Int32" Name="SUBJECT_ID" Nullable="false" />
+    <Property Type="Int32" Name="STUDENT_ID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="getStudentByCard_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="STUDENT_NAME" Nullable="true" MaxLength="100" />
+    <Property Type="Binary" Name="PHOTO" Nullable="true" />
+    <Property Type="String" Name="LOGIN" Nullable="false" MaxLength="50" />
+    <Property Type="Binary" Name="PASSWORD" Nullable="false" MaxLength="256" />
+    <Property Type="Int32" Name="ROLE_ID" Nullable="false" />
+    <Property Type="Int32" Name="GROUP_ID" Nullable="true" />
+    <Property Type="Int32" Name="SUBGROUP_ID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="getStudentsForHeadman_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="STUDENT_NAME" Nullable="true" MaxLength="100" />
+    <Property Type="Binary" Name="PHOTO" Nullable="true" />
+    <Property Type="String" Name="LOGIN" Nullable="false" MaxLength="50" />
+    <Property Type="Binary" Name="PASSWORD" Nullable="false" MaxLength="256" />
+    <Property Type="Int32" Name="ROLE_ID" Nullable="false" />
+    <Property Type="Int32" Name="GROUP_ID" Nullable="true" />
+    <Property Type="Int32" Name="SUBGROUP_ID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="getSubjects_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="SUBJECT_NAME" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="FACULTY_ID" Nullable="false" />
+    <Property Type="Int32" Name="PROFESSION_ID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="getTasksBySubject_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="CONTENT" Nullable="false" MaxLength="500" />
+    <Property Type="DateTime" Name="DUEDATE" Nullable="false" />
+    <Property Type="Boolean" Name="IS_COMPLITE" Nullable="false" />
+    <Property Type="Int32" Name="SUBJECT_ID" Nullable="false" />
+    <Property Type="Int32" Name="STUDENT_ID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="getTasksForStudent_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="CONTENT" Nullable="false" MaxLength="500" />
+    <Property Type="DateTime" Name="DUEDATE" Nullable="false" />
+    <Property Type="Boolean" Name="IS_COMPLITE" Nullable="false" />
+    <Property Type="Int32" Name="SUBJECT_ID" Nullable="false" />
+    <Property Type="Int32" Name="STUDENT_ID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="getTimetable_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="Int32" Name="LESSON_DAY" Nullable="true" />
+    <Property Type="Int32" Name="LESSON_NUMBER" Nullable="true" />
+    <Property Type="String" Name="LESSON_TIME" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="LESSON_TYPE" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="LESSON_WEEK" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="AUDITORIUM" Nullable="true" MaxLength="10" />
+    <Property Type="Int32" Name="SUBJECT_ID" Nullable="true" />
+    <Property Type="Int32" Name="GROUP_ID" Nullable="false" />
+    <Property Type="Int32" Name="SUBGROUP_ID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="getTimetableByWeek_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="Int32" Name="LESSON_DAY" Nullable="true" />
+    <Property Type="Int32" Name="LESSON_NUMBER" Nullable="true" />
+    <Property Type="String" Name="LESSON_TIME" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="LESSON_TYPE" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="LESSON_WEEK" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="AUDITORIUM" Nullable="true" MaxLength="10" />
+    <Property Type="Int32" Name="SUBJECT_ID" Nullable="true" />
+    <Property Type="Int32" Name="GROUP_ID" Nullable="false" />
+    <Property Type="Int32" Name="SUBGROUP_ID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="getUnsatisfiedTasks_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="CONTENT" Nullable="false" MaxLength="500" />
+    <Property Type="DateTime" Name="DUEDATE" Nullable="false" />
+    <Property Type="Boolean" Name="IS_COMPLITE" Nullable="false" />
+    <Property Type="Int32" Name="SUBJECT_ID" Nullable="false" />
+    <Property Type="Int32" Name="STUDENT_ID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="getUserByLogin_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="STUDENT_NAME" Nullable="true" MaxLength="100" />
+    <Property Type="Binary" Name="PHOTO" Nullable="true" />
+    <Property Type="String" Name="LOGIN" Nullable="false" MaxLength="50" />
+    <Property Type="Binary" Name="PASSWORD" Nullable="false" MaxLength="256" />
+    <Property Type="Int32" Name="ROLE_ID" Nullable="false" />
+    <Property Type="Int32" Name="GROUP_ID" Nullable="true" />
+    <Property Type="Int32" Name="SUBGROUP_ID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="getSubjectByFacultyProfessionName_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="SUBJECT_NAME" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="FACULTY_ID" Nullable="false" />
+    <Property Type="Int32" Name="PROFESSION_ID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="getTimetableByWeekAdmin_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="Int32" Name="LESSON_DAY" Nullable="true" />
+    <Property Type="Int32" Name="LESSON_NUMBER" Nullable="true" />
+    <Property Type="String" Name="LESSON_TIME" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="LESSON_TYPE" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="LESSON_WEEK" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="AUDITORIUM" Nullable="true" MaxLength="10" />
+    <Property Type="Int32" Name="SUBJECT_ID" Nullable="true" />
+    <Property Type="Int32" Name="GROUP_ID" Nullable="false" />
+    <Property Type="Int32" Name="SUBGROUP_ID" Nullable="false" />
+  </ComplexType>
+</Schema>

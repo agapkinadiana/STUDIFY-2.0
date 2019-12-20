@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Faculty>
+  <Faculty>
+    <ID>5</ID>
+    <FACULTY_NAME>LH</FACULTY_NAME>
+  </Faculty>
+  <Faculty>
+    <ID>6</ID>
+    <FACULTY_NAME>TTLP</FACULTY_NAME>
+  </Faculty>
+  <Faculty>
+    <ID>7</ID>
+    <FACULTY_NAME>TOV</FACULTY_NAME>
+  </Faculty>
+  <Faculty>
+    <ID>8</ID>
+    <FACULTY_NAME>HTIT</FACULTY_NAME>
+  </Faculty>
+  <Faculty>
+    <ID>9</ID>
+    <FACULTY_NAME>PIM</FACULTY_NAME>
+  </Faculty>
+  <Faculty>
+    <ID>10</ID>
+    <FACULTY_NAME>IEF</FACULTY_NAME>
+  </Faculty>
+  <Faculty>
+    <ID>11</ID>
+    <FACULTY_NAME>IT</FACULTY_NAME>
+  </Faculty>
+</Faculty>

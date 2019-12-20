@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище STUDIFY2ModelContainer" CdmEntityContainer="STUDIFY2Entities">
+    <EntitySetMapping Name="ADS">
+      <EntityTypeMapping TypeName="STUDIFY2Model.ADS">
+        <MappingFragment StoreEntitySet="ADS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+          <ScalarProperty Name="DATE_OF_CREATE" ColumnName="DATE_OF_CREATE" />
+          <ScalarProperty Name="STUDENT_ID" ColumnName="STUDENT_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FACULTY">
+      <EntityTypeMapping TypeName="STUDIFY2Model.FACULTY">
+        <MappingFragment StoreEntitySet="FACULTY">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FACULTY_NAME" ColumnName="FACULTY_NAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GROUP">
+      <EntityTypeMapping TypeName="STUDIFY2Model.GROUP">
+        <MappingFragment StoreEntitySet="GROUP">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="COURSE" ColumnName="COURSE" />
+          <ScalarProperty Name="GROUP_NUMBER" ColumnName="GROUP_NUMBER" />
+          <ScalarProperty Name="FACULTY_ID" ColumnName="FACULTY_ID" />
+          <ScalarProperty Name="PROFESSION_ID" ColumnName="PROFESSION_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LESSON">
+      <EntityTypeMapping TypeName="STUDIFY2Model.LESSON">
+        <MappingFragment StoreEntitySet="LESSON">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="LESSON_DAY" ColumnName="LESSON_DAY" />
+          <ScalarProperty Name="LESSON_NUMBER" ColumnName="LESSON_NUMBER" />
+          <ScalarProperty Name="LESSON_TIME" ColumnName="LESSON_TIME" />
+          <ScalarProperty Name="LESSON_TYPE" ColumnName="LESSON_TYPE" />
+          <ScalarProperty Name="LESSON_WEEK" ColumnName="LESSON_WEEK" />
+          <ScalarProperty Name="AUDITORIUM" ColumnName="AUDITORIUM" />
+          <ScalarProperty Name="SUBJECT_ID" ColumnName="SUBJECT_ID" />
+          <ScalarProperty Name="GROUP_ID" ColumnName="GROUP_ID" />
+          <ScalarProperty Name="SUBGROUP_ID" ColumnName="SUBGROUP_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PROFESSION">
+      <EntityTypeMapping TypeName="STUDIFY2Model.PROFESSION">
+        <MappingFragment StoreEntitySet="PROFESSION">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PROFESSION_NAME" ColumnName="PROFESSION_NAME" />
+          <ScalarProperty Name="FACULTY_ID" ColumnName="FACULTY_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PROGRESS">
+      <EntityTypeMapping TypeName="STUDIFY2Model.PROGRESS">
+        <MappingFragment StoreEntitySet="PROGRESS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NEEDED_TASKS" ColumnName="NEEDED_TASKS" />
+          <ScalarProperty Name="COMPLITED_TASKS" ColumnName="COMPLITED_TASKS" />
+          <ScalarProperty Name="PROGRESS_COUNT" ColumnName="PROGRESS_COUNT" />
+          <ScalarProperty Name="SUBJECT_ID" ColumnName="SUBJECT_ID" />
+          <ScalarProperty Name="STUDENT_ID" ColumnName="STUDENT_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ROLE">
+      <EntityTypeMapping TypeName="STUDIFY2Model.ROLE">
+        <MappingFragment StoreEntitySet="ROLE">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="STUDENT">
+      <EntityTypeMapping TypeName="STUDIFY2Model.STUDENT">
+        <MappingFragment StoreEntitySet="STUDENT">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="STUDENT_NAME" ColumnName="STUDENT_NAME" />
+          <ScalarProperty Name="PHOTO" ColumnName="PHOTO" />
+          <ScalarProperty Name="LOGIN" ColumnName="LOGIN" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="ROLE_ID" ColumnName="ROLE_ID" />
+          <ScalarProperty Name="GROUP_ID" ColumnName="GROUP_ID" />
+          <ScalarProperty Name="SUBGROUP_ID" ColumnName="SUBGROUP_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SUBGROUP">
+      <EntityTypeMapping TypeName="STUDIFY2Model.SUBGROUP">
+        <MappingFragment StoreEntitySet="SUBGROUP">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SUBGROUP_NUMBER" ColumnName="SUBGROUP_NUMBER" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SUBJECT">
+      <EntityTypeMapping TypeName="STUDIFY2Model.SUBJECT">
+        <MappingFragment StoreEntitySet="SUBJECT">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SUBJECT_NAME" ColumnName="SUBJECT_NAME" />
+          <ScalarProperty Name="FACULTY_ID" ColumnName="FACULTY_ID" />
+          <ScalarProperty Name="PROFESSION_ID" ColumnName="PROFESSION_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TASK">
+      <EntityTypeMapping TypeName="STUDIFY2Model.TASK">
+        <MappingFragment StoreEntitySet="TASK">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+          <ScalarProperty Name="DUEDATE" ColumnName="DUEDATE" />
+          <ScalarProperty Name="IS_COMPLITE" ColumnName="IS_COMPLITE" />
+          <ScalarProperty Name="SUBJECT_ID" ColumnName="SUBJECT_ID" />
+          <ScalarProperty Name="STUDENT_ID" ColumnName="STUDENT_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="addProgress" FunctionName="Хранилище STUDIFY2Model.addProgress" />
+    <FunctionImportMapping FunctionImportName="addTask" FunctionName="Хранилище STUDIFY2Model.addTask" />
+    <FunctionImportMapping FunctionImportName="changeCompliteFalse" FunctionName="Хранилище STUDIFY2Model.changeCompliteFalse" />
+    <FunctionImportMapping FunctionImportName="changeCompliteTrue" FunctionName="Хранилище STUDIFY2Model.changeCompliteTrue" />
+    <FunctionImportMapping FunctionImportName="checkRole" FunctionName="Хранилище STUDIFY2Model.checkRole" />
+    <FunctionImportMapping FunctionImportName="checkStudentData" FunctionName="Хранилище STUDIFY2Model.checkStudentData" />
+    <FunctionImportMapping FunctionImportName="checkTimetableByIdGroup" FunctionName="Хранилище STUDIFY2Model.checkTimetableByIdGroup" />
+    <FunctionImportMapping FunctionImportName="countMessage" FunctionName="Хранилище STUDIFY2Model.countMessage" />
+    <FunctionImportMapping FunctionImportName="deleteMessage" FunctionName="Хранилище STUDIFY2Model.deleteMessage" />
+    <FunctionImportMapping FunctionImportName="deleteProgress" FunctionName="Хранилище STUDIFY2Model.deleteProgress" />
+    <FunctionImportMapping FunctionImportName="deleteTask" FunctionName="Хранилище STUDIFY2Model.deleteTask" />
+    <FunctionImportMapping FunctionImportName="getCourse" FunctionName="Хранилище STUDIFY2Model.getCourse" />
+    <FunctionImportMapping FunctionImportName="getFaculties" FunctionName="Хранилище STUDIFY2Model.getFaculties" />
+    <FunctionImportMapping FunctionImportName="getFacultyIdByName" FunctionName="Хранилище STUDIFY2Model.getFacultyIdByName" />
+    <FunctionImportMapping FunctionImportName="getGroup" FunctionName="Хранилище STUDIFY2Model.getGroup" />
+    <FunctionImportMapping FunctionImportName="getGroupId" FunctionName="Хранилище STUDIFY2Model.getGroupId" />
+    <FunctionImportMapping FunctionImportName="getMessage" FunctionName="Хранилище STUDIFY2Model.getMessage" />
+    <FunctionImportMapping FunctionImportName="getProfessionIdByName" FunctionName="Хранилище STUDIFY2Model.getProfessionIdByName" />
+    <FunctionImportMapping FunctionImportName="getProfessions" FunctionName="Хранилище STUDIFY2Model.getProfessions" />
+    <FunctionImportMapping FunctionImportName="getProgress" FunctionName="Хранилище STUDIFY2Model.getProgress" />
+    <FunctionImportMapping FunctionImportName="getSatisfiedTasks" FunctionName="Хранилище STUDIFY2Model.getSatisfiedTasks" />
+    <FunctionImportMapping FunctionImportName="getStudentByCard" FunctionName="Хранилище STUDIFY2Model.getStudentByCard" />
+    <FunctionImportMapping FunctionImportName="getStudentsForHeadman" FunctionName="Хранилище STUDIFY2Model.getStudentsForHeadman" />
+    <FunctionImportMapping FunctionImportName="getSubgroup" FunctionName="Хранилище STUDIFY2Model.getSubgroup" />
+    <FunctionImportMapping FunctionImportName="getSubgroupId" FunctionName="Хранилище STUDIFY2Model.getSubgroupId" />
+    <FunctionImportMapping FunctionImportName="getSubjects" FunctionName="Хранилище STUDIFY2Model.getSubjects" />
+    <FunctionImportMapping FunctionImportName="getTasksBySubject" FunctionName="Хранилище STUDIFY2Model.getTasksBySubject" />
+    <FunctionImportMapping FunctionImportName="getTasksForStudent" FunctionName="Хранилище STUDIFY2Model.getTasksForStudent" />
+    <FunctionImportMapping FunctionImportName="getTimetable" FunctionName="Хранилище STUDIFY2Model.getTimetable" />
+    <FunctionImportMapping FunctionImportName="getTimetableByWeek" FunctionName="Хранилище STUDIFY2Model.getTimetableByWeek" />
+    <FunctionImportMapping FunctionImportName="getUnsatisfiedTasks" FunctionName="Хранилище STUDIFY2Model.getUnsatisfiedTasks" />
+    <FunctionImportMapping FunctionImportName="getUserByLogin" FunctionName="Хранилище STUDIFY2Model.getUserByLogin" />
+    <FunctionImportMapping FunctionImportName="insertTimetable" FunctionName="Хранилище STUDIFY2Model.insertTimetable" />
+    <FunctionImportMapping FunctionImportName="registerStudent" FunctionName="Хранилище STUDIFY2Model.registerStudent" />
+    <FunctionImportMapping FunctionImportName="sendMessage" FunctionName="Хранилище STUDIFY2Model.sendMessage" />
+    <FunctionImportMapping FunctionImportName="setPhoto" FunctionName="Хранилище STUDIFY2Model.setPhoto" />
+    <FunctionImportMapping FunctionImportName="updateProgress" FunctionName="Хранилище STUDIFY2Model.updateProgress" />
+    <FunctionImportMapping FunctionImportName="updateTimetable" FunctionName="Хранилище STUDIFY2Model.updateTimetable" />
+    <FunctionImportMapping FunctionImportName="getSubjectByFacultyProfessionName" FunctionName="Хранилище STUDIFY2Model.getSubjectByFacultyProfessionName" />
+    <FunctionImportMapping FunctionImportName="getTimetableByWeekAdmin" FunctionName="Хранилище STUDIFY2Model.getTimetableByWeekAdmin" />
+  </EntityContainerMapping>
+</Mapping>
